@@ -1,0 +1,21 @@
+theme = "zen"
+[markup.goldmark.renderer]
+  unsafe = true
+defaultContentLanguage = 'en'
+[languages]
+  [languages.en]
+    languageName = 'English'
+    contentDir = 'content/en'
+    weight = 1
+    title = 'nodecum - learning'
+  [languages.de]
+    languageName = 'Deutsch'
+    contentDir = 'content/de' 
+    weight = 2
+    title = 'nodecum - lernen'
+
+[params]
+  sidebar = true
+  background_color_class = "bg-gray"
+  realfavicongenerator = true
+  # mainSections = ""   # no listing on front page

@@ -1,0 +1,68 @@
+* DONE Betriebssystem                                                    :os:
+:PROPERTIES:
+:EXPORT_FILE_NAME: operating-system
+:END:
+Wir wollen für die Entwicklung von Open Source Sofware auch ebensolche einsetzen,
+deshalb beschreiben wir das Vorgehen anhand von Linux. Wir benutzen Ubuntu, andere
+Distributionen sollten sich ähnlich verhalten.
+** Das Terminal
+Früher hat man mit einem Rechner über ein Terminal kommuniziert. Das ist wie eine
+Schreibmaschine mit Bildschirm. Man gibt Befehle ein und erhält eine Ausgabe auf
+dem Bildschirm zurück. Wir werden diesem Konzept noch oft begegnen. Es ist wenn
+man sich daran gewöhnt hat eine sehr flexible Art und Weise der Maschine
+mitzuteilen, was man von ihr will. 
+
+Der heutige Benutzer kennt oft nur die grafische Benutzerobefläche (GUI Graphical User Interface)
+um mit Programmen auf dem Rechner zu kommunizieren. Wir benötigen aber ein Terminal
+und verwenden ein Terminal-Emulations Programm welches uns in einem Fenster Ein- und Ausgabe
+ermöglicht. Wir finden ein solches zB. im Menü ~Systemwerkzeuge -> QTerminal~.
+
+Mit diesem Programm können wir sogar mehrere Terminal Sitzungen parallel geöffnet halten
+(~<Ctrl+Shift+Tab>~ erzeugt eine zusätzliche Sitzung).
+
+** Die Shell
+Das Programm welches unsere Eingaben verwertet und uns wieder etwas zurück gibt wird als
+Shell (Schale) bezeichnet. In unserem Fall ist das konkret die Bash (Bourne Again Shell)
+welche meist standardmäßig konfiguriert ist.
+
+Man sollte lernen wie man sich mit einfachen Befehlen im Dateisystem bewegt (~cd~),
+Dateien kopieren (~cp~), löschen (~rm~), verschieben (~mv~) und anzeigen (~less~) kann.
+
+Zu erwähnen ist das man die zuletzt eingegebenen Befehle mit der nach oben zeigenden Cursor Taste (Pfeil)
+wieder hervor holen und auch verändern (editieren) kann. Desweiteren ist die Tabulator Taste
+ein Wertvoller Gefährte, mit ihr kann man Befehle oder auch Dateinamen vervollständigen (completion).
+Das spart viel Schreibarbeit und schützt vor Tippfehlern.
+
+** Programme installieren
+Für die Installation von Programmen, in diesem Kontext auch Pakete genannt werden wir 
+Paket-Verwalter (Package Manager) wie ~apt~ und ~snap~ verwenden. Während ~apt~
+Software Versionen anbietet die sich gut in die Linux Distribution einbinden so ist
+es mit ~snap~ möglich auch neuere Versionen zu installieren was wir uns gegebenfalls
+zu Nutzen machen werden.
+
+* DONE Die Werkzeugkiste                                    :toolbox:
+:PROPERTIES:
+:EXPORT_FILE_NAME: toolbox
+:END:
+** Emacs - unser Editor
+Wir werden als Entwickler von Software Textdateien bearbeiten.
+Dafür benötigen wir ein Werkzeug, den sogenannten Editor.
+Wir haben den [[https://www.gnu.org/software/emacs/][Emacs]] mit gutem Grund ausgewählt, wir werden
+damit sowohl die Programmdateien als auch die Dokumentation
+erstellen.
+
+Wir installieren das emacs Paket:
+#+begin_src shell
+$ sudo snap install emacs  
+#+end_src
+~sudo~ führt den nachfolgenden Befehl als Super-User=Administrator aus.
+
+Nach der Installation kann man den Editor über das Menü ~Entwicklung -> Emacs~
+öffnen.
+** Git - unser Versions Kontroll System
+Open Source Software würde ohne ein System welches es ermöglicht die Arbeit von
+vielen Entwicklern welche gemeinsam an einem Projekt arbeiten zu koordinieren.
+Auch als einzelner kann man schon viele Vorteile daraus gewinnen:
+- Versionskontrolle: alte Stände können wieder hervorgeholt werden
+- Verteilte Speicherorte:  
+
