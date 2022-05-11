@@ -1,0 +1,26 @@
+#+title: Dokumentation Schreiben
+
+Um die Dokumentation zu schreiben benutzen wir den Emacs [[https://orgmode.org][Org-Mode]].
+Die Dateien werden unter *doc/content* angelegt.
+Wir benutzen [[https://gohugo.io][Hugo]] um aus den org files eine statische Website zu erzeugen.
+
+* Repository
+** Klonen des Repositories
+Dieser Schritt muss nur beim allerersten mal erfolgen!
+Mit https:
+: $ git clone https://github.com/nodecum/nodecum-learning.git
+bzw wenn man dann auch Änderungen weitergeben will mit ssh:
+: $ git clone git@github.com:nodecum/nodecum-learning.git
+** Update des Repositories
+Bevor man Änderungen macht ist es ratsam sich den aktuellen Stand zu holen.
+: $ cd nodecum-learning
+: $ git pull
+
+
+* Org-Mode
+
+* Hugo
+** Installation
+#+begin_src shell
+$ snap install hugo --channel=extended
+#+end_src
