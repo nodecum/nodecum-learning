@@ -14,7 +14,7 @@ $ sudo snap install emacs
 
 Nach der Installation kann man den Editor über das Menü ~Entwicklung -> Emacs~
 öffnen.
-** Git - Versions Kontroll System
+* Git - Versions Kontroll System
 Open Source Software würde ohne ein System welches es ermöglicht die Arbeit von
 vielen Entwicklern welche gemeinsam an einem Projekt arbeiten zu koordinieren.
 Auch als einzelner kann man schon viele Vorteile daraus gewinnen:
