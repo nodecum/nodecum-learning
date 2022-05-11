@@ -1,11 +1,8 @@
-* DONE Operating System                                   :os:
-:PROPERTIES:
-:EXPORT_FILE_NAME: operating-system
-:END:
+#+title: Operating System                                   
 For the development of open source software we also want to use open source
 software. Therefore we choosed to describe the procedures on the basis of Linux.
 We use Ubuntu, other distributions should behave similarly.
-** The terminal
+* The terminal
 In the past you communicated with a computer via a terminal. This is like a
 typewriter with a screen. You type commands and get an output on the screen.
 We're going to run into this concept a lot more. It is, if you get used to it,
@@ -19,7 +16,7 @@ We can find such a program in the menu ~System Tools -> QTerminal~.
 With this program we can even keep several terminal sessions open in parallel
 (~<Ctrl+Shift+Tab>~ creates an additional session).
 
-** The Shell
+* The Shell
 The program which processes our input and returns something to us is called the
 shell. In our case this is concretely the Bash (Bourne Again Shell)
 which is mostly configured by default.
@@ -35,7 +32,7 @@ Furthermore the tabulator key
 is a valuable companion, with it you can complete commands or file names.
 This saves a lot of typing and protects against typos.
 
-** Install programs
+* Install programs
 For the installation of programs, in this context also called packages, we use 
 package managers like ~apt~ and ~snap~. While ~apt~
 offers software versions that integrate well into the Linux distribution,

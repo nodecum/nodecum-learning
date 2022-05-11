@@ -1,0 +1,44 @@
+#+title: Werkzeugkiste   
+* Emacs - Editor
+Wir werden als Entwickler von Software Textdateien bearbeiten.
+Dafür benötigen wir ein Werkzeug, den sogenannten Editor.
+Wir haben den [[https://www.gnu.org/software/emacs/][Emacs]] mit gutem Grund ausgewählt, wir werden
+damit sowohl die Programmdateien als auch die Dokumentation
+erstellen.
+
+Wir installieren das emacs Paket:
+#+begin_src shell
+$ sudo snap install emacs  
+#+end_src
+~sudo~ führt den nachfolgenden Befehl als Super-User=Administrator aus.
+
+Nach der Installation kann man den Editor über das Menü ~Entwicklung -> Emacs~
+öffnen.
+** Git - Versions Kontroll System
+Open Source Software würde ohne ein System welches es ermöglicht die Arbeit von
+vielen Entwicklern welche gemeinsam an einem Projekt arbeiten zu koordinieren.
+Auch als einzelner kann man schon viele Vorteile daraus gewinnen:
+- Versionskontrolle: alte Stände können wieder hervorgeholt werden
+- Verteilte Speicherorte: Es gibt perse keinen zentrales Repository,
+  jede Kopie enthält die gleichen Informationen die bei Veränderungen
+  gegenseitig vereinigt werden.
+- [[https://github.com]] ist für viele Software Projekte die zentrale Anlaufstelle,
+  man kann in den Projekten suchen, die Macher kontaktieren, sich selber
+  engagieren um die Software zu verbessern.
+
+Als Beispiel wie das funktionieren kann wollen wir eine Kopie vom
+Repository dieses Projektes anfertigen. Dazu navigieren wir erst einmal
+mit einem Webbrowser zur Adresse: [[https://github.com/nodecum/nodecum-learning]].
+Weil es ein öffentliches Repository ist kann man sich alle Files darinnen
+ansehen und auch deren Geschichte einsehen. Wenn man auf den grün hinterlegten
+Knopf *Code* geht kann man HTTPS auswählen und sieht dann die URL (Web Adresse)
+des Repositories welches man dann wie folgt kopieren kann:
+
+#+begin_src shell
+$ git clone https://github.com/nodecum/nodecum-learning.git
+#+end_src
+
+Mit dem https Protokoll erhält man nur lesenden Zugriff. Möchte man seine
+Änderungen publizieren benutzt man das ssl Protokoll, benötigt aber auch einen
+Account auf [[https://github.com]].
+

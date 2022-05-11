@@ -1,0 +1,9 @@
+#+title: Home
+
+Unser Ziel ist die Entwicklung eines auf Open Source basierenden
+autarken Kommunikationssystems.
+Wir wollen dafür das [[https://zephyrproject.org/][Zephyr]] RTOS (Real Time Operating System = Echtzeitbetriebssystem)
+einsetzen. Die Hardware-nahe Programmierung kann für den Beginner eine Herausforderung
+sein. Wir wollen gemeinsam einen Weg finden um das Verständnis für die Programmierung und
+Hardwareentwicklung schrittweise am Beispiel zu entwickeln und zu dokumentieren.
+
