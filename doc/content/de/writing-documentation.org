@@ -18,6 +18,8 @@ Bevor man Änderungen macht ist es ratsam sich den aktuellen Stand zu holen.
 
 
 * Org-Mode
+When generating the documentation the org files are parsed by
+[[https://github.com/niklasfasching/go-org][go-org]] which is a part of hugo. See [[https://niklasfasching.github.io/go-org][go-org doc]] for supported org features.
 
 * Hugo
 ** Installation
