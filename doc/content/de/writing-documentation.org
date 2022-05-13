@@ -3,7 +3,12 @@
 Um die Dokumentation zu schreiben benutzen wir den Emacs [[https://orgmode.org][Org-Mode]].
 Die Dateien werden unter *doc/content* angelegt.
 Wir benutzen [[https://gohugo.io][Hugo]] um aus den org files eine statische Website zu erzeugen.
-
+Das macht man zunächst lokal und kann seine Änderungen mit einem Webbrowser 
+verfolgen. Möchte man, daß die Änderungen auch auf dem Webserver wirksam werden,
+dann werden die Änderungen des Repositories auf github publiziert (push).
+Über einen sogenannten webhook wird der Webserver benachrichtigt welcher sich
+daraufhin die Änderungen des Repositories holt, Hugo aufruft um die Website neu
+zu übersetzen. Dannach sind die Änderungen im www Netz verfügbar.
 * Repository
 ** Klonen des Repositories
 Dieser Schritt muss nur beim allerersten mal erfolgen!
@@ -22,7 +27,16 @@ When generating the documentation the org files are parsed by
 [[https://github.com/niklasfasching/go-org][go-org]] which is a part of hugo. See [[https://niklasfasching.github.io/go-org][go-org doc]] for supported org features.
 
 * Hugo
+[[https://gohugo.io][Hugo]] ist ein statischer Webseiten Generator. Das bedeutet die Quelldateien
+(in unserem Fall im .org Format) werden in HTML Dateien umgewandelt, welche dann
+die Webseiten darstellen. 
 ** Installation
-#+begin_src shell
-$ snap install hugo --channel=extended
-#+end_src
+: $ snap install hugo --channel=extended
+** Compilieren
+Um einen lokalen Webserver zu erhalten welcher die zuletzt geänderte Seite automatisch
+neu übersetzt:
+: $ cd nodecum-learning/doc
+: $ hugo server --navigateToChanged
+danach kann man seinen Webbrowser auf die Adresse [[http://localhost:1313]] richten um
+die Webseite zu betrachten. Jedes Abspeichern einer .org Datei im Verzeichnis ~content/~
+wird eine Neuübersetzung der entsprechenden HTML Datei veranlassen.  
