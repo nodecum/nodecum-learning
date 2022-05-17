@@ -1,0 +1,95 @@
+#+title: Die Entwicklungsumgebung
+
+Wir möchten beschreiben wie man die nötige Software installiert um unter
+Zephyr Programme zu entwickeln. Dabei gehen wir prinizipiell so vor wie es im
+[[https://docs.zephyrproject.org/latest/develop/getting_started/index.html][Getting Started Guide]] von Zephyr beschrieben ist.
+
+
+* Verzeichnisse
+Wir müssen festlegen wohin wir die zu installierenden Komponenten in der
+Verzeichnisstruktur unterbringen wollen. Um immer einen gleichen Bezug
+zu haben erschaffen wir uns in unserm Nutzer Verzeichnis (~~~) einen Eintrag
+~~/prog~:
+: mkdir ~/prog
+: cd ~/prog
+
+* Aktualisieren des Betriebssystems
+: $ sudo apt update
+: $ sudo apt upgrade
+
+* Installieren der Abhängigkeiten
+** Hinzufügen vom Kitware APT repository
+Kitware stellt CMake als Ubuntu Package zur Verfügung.
+Deshalb fügen wir es zu den APT Resourcen hinzu:
+: sudo apt-get install gpg wget
+: wget https://apt.kitware.com/kitware-archive.sh
+: sudo bash kitware-archive.sh
+wir können das Skript nach der Ausführung löschen:
+: rm kitware-archive.sh
+** Komponenten installieren
+#+begin_example
+sudo apt install --no-install-recommends git cmake ninja-build gperf \
+  ccache dfu-util device-tree-compiler wget \
+  python3-dev python3-pip python3-setuptools python3-tk python3-wheel xz-utils file \
+  make gcc gcc-multilib g++-multilib libsdl2-dev
+#+end_example
+** Verzeichnis ~/prog/zephyrproject~ Erstellen
+Dieses Verzeichnis wird als Basis für verschiedene zephyr Komponenten dienen. 
+Ausgehend vom Verzeichnis ~~/prog~:
+: mkdir zephyrproject
+oder direkt aus einem beliebig anderem Verzeichnis:
+: mkdir ~/prog/zephyrproject
+** Virtuelle Python Umgebung
+Zephyr benutzt Python Skripte welche ihrerseits Abhängigkeiten haben.
+Diese Abhängigkeiten können Konflikte mit anderen (nicht Zephyr) Python
+Abhängigkeiten hervorbringen. Dafür gibt es als Lösung die Benutzung einer
+virtuellen Python Umgebung, in welcher die Abhängigkeiten dann nicht global
+sondern lokal in der virtuellen Umgebung installiert und benutzt werden.
+Die Folge ist, daß man diese Umgebung aktivieren muß, um die Anwendungen welche
+sie enthält benutzen zu können.
+
+Installation von python3-venv
+: sudo apt install python3-venv
+
+Erstellen der virtuellen Umgebung:
+: python3 -m venv ~/prog/zephyrproject/zenv
+
+Aktiviert wird diese Umgebung mit dem Aufruf:
+: source ~/prog/zephyrproject/zenv/bin/activate
+
+Da das etwas Umständlich zu merken und aufzurufen ist können wir uns einen
+Alias erzeugen. Wir editieren/erzeugen die Datei ~~/.bash_aliases~ mit
+dem Inhalt
+: alias zenv="source ~/prog/zephyrproject/zenv/bin/activate"
+Danach können wir durch die Eingabe von ~zenv~ die Umgebung aktivieren.
+
+Deaktiviert wird die Umgebung mit
+: deactivate
+
+Wir aktivieren die Umgebung und fahren fort.
+** Install Zephyr Sources
+West ist das Meta-Werkzeug von Zephyr.
+: pip install west
+: cd ~/prog/zephyrproject
+: west init .
+: west update
+: west zephyr-export
+: pip install -r zephyr/scripts/requirements.txt
+** Install Zephyr SDK Toolchain(s)
+Wir installieren die minimale sdk Variante: (v0.14.2) ist zu ersetzen durch die jeweils
+letzte Revision, siehe [[https://github.com/zephyrproject-rtos/sdk-ng/releases][Releases]]
+: wget https://github.com/zephyrproject-rtos/sdk-ng/releases/download/v0.14.2/zephyr-sdk-0.14.2_linux-x86_64_minimal.tar.gz
+: wget -O - https://github.com/zephyrproject-rtos/sdk-ng/releases/download/v0.14.2/sha256.sum | shasum --check --ignore-missing
+Wir entpacken dieses Archiev nach ~~/bin~ ,welches auch als ~$HOME/bin~ geschrieben werden kann:
+: tar -xvf zephyr-sdk-0.14.2_linux-x86_64_minimal.tar.gz -C ~/bin
+und führen das ~setup.sh~ Skript aus:
+: cd ~/bin/zephyr-sdk-0.14.2
+: ./setup.sh -t arm-zephyr-eabi -h -c
+Damit installieren wir die Toolchain für die ARM Architektur welches uns erst einmal genügen sollte.  
+* Ein Beispielprogramm bauen
+: cd ~/prog/zephyrproject/zephyr
+Wir bauen das ~hello_world~ Beispielprogram als cortex m0 Emulation.
+: west build -b qemu_cortex_m0 samples/hello_world
+Ausführung mit qemu
+: west build -t run
+
