@@ -1,4 +1,6 @@
 #+title: Betriebssystem
+#+weight: 10
+
 Wir wollen für die Entwicklung von Open Source Sofware auch ebensolche einsetzen,
 deshalb beschreiben wir das Vorgehen anhand von Linux. Wir benutzen Ubuntu, andere
 Distributionen sollten sich ähnlich verhalten.

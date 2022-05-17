@@ -1,4 +1,5 @@
 #+title: Dokumentation Schreiben
+#+weight: 40
 
 Um die Dokumentation zu schreiben benutzen wir den Emacs [[https://orgmode.org][Org-Mode]].
 Die Dateien werden unter *doc/content* angelegt.
@@ -13,13 +14,13 @@ zu übersetzen. Dannach sind die Änderungen im www Netz verfügbar.
 ** Klonen des Repositories
 Dieser Schritt muss nur beim allerersten mal erfolgen!
 Mit https:
-: $ git clone https://github.com/nodecum/nodecum-learning.git
+: git clone https://github.com/nodecum/nodecum-learning.git
 bzw wenn man dann auch Änderungen weitergeben will mit ssh:
-: $ git clone git@github.com:nodecum/nodecum-learning.git
+: git clone git@github.com:nodecum/nodecum-learning.git
 ** Update des Repositories
 Bevor man Änderungen macht ist es ratsam sich den aktuellen Stand zu holen.
-: $ cd nodecum-learning
-: $ git pull
+: cd nodecum-learning
+: git pull
 
 
 * Org-Mode
@@ -31,12 +32,12 @@ When generating the documentation the org files are parsed by
 (in unserem Fall im .org Format) werden in HTML Dateien umgewandelt, welche dann
 die Webseiten darstellen. 
 ** Installation
-: $ snap install hugo --channel=extended
+: snap install hugo --channel=extended
 ** Compilieren
 Um einen lokalen Webserver zu erhalten welcher die zuletzt geänderte Seite automatisch
 neu übersetzt:
-: $ cd nodecum-learning/doc
-: $ hugo server --navigateToChanged
+: cd nodecum-learning/doc
+: hugo server --navigateToChanged
 danach kann man seinen Webbrowser auf die Adresse [[http://localhost:1313]] richten um
-die Webseite zu betrachten. Jedes Abspeichern einer .org Datei im Verzeichnis ~content/~
+die Webseite zu betrachten. Jedes Abspeichern einer ~.org~ Datei im Verzeichnis ~content/~
 wird eine Neuübersetzung der entsprechenden HTML Datei veranlassen.  

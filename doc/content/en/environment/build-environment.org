@@ -1,0 +1,96 @@
+#+title: Zephyr Build Environment
+#+weight: 30
+
+We would like to describe how to install the necessary software to develop programs under
+Zephyr. We will follow the basic procedure as described in the
+[[https://docs.zephyrproject.org/latest/develop/getting_started/index.html][Getting Started Guide]] of Zephyr.
+
+
+* Directories
+We have to determine where we want to put the components to be installed in the
+directory structure. To always have the same reference
+we create in our user directory (~~~) an entry
+~~/prog~:
+: mkdir ~/prog
+: cd ~/prog
+
+* Update the operating system
+: $ sudo apt update
+: $ sudo apt upgrade
+
+* Install the Dependencies
+** Adding from Kitware APT repository
+Kitware provides CMake as an Ubuntu package.
+Therefore, we add it to the APT resources:
+: sudo apt-get install gpg wget
+: wget https://apt.kitware.com/kitware-archive.sh
+sudo bash kitware-archive.sh
+we can delete the script after execution:
+: rm kitware-archive.sh
+** Install Components
+#+begin_example
+sudo apt install --no-install-recommends git cmake ninja-build gperf \
+  ccache dfu-util device-tree-compiler wget \
+  python3-dev python3-pip python3-setuptools python3-tk python3-wheel xz-utils file \
+  make gcc gcc-multilib g++-multilib libsdl2-dev
+#+end_example
+** Create directory ~~/prog/zephyrproject~.
+This directory will serve as the base for various zephyr components. 
+Starting from the directory ~~/prog~:
+: mkdir zephyrproject
+or directly from any other directory:
+: mkdir ~/prog/zephyrproject
+** Virtual Python environment
+Zephyr uses Python scripts which in turn have dependencies.
+These dependencies may conflict with other (non Zephyr) Python dependencies.
+The solution to this is to use a
+virtual Python environment, in which the dependencies are not installed globally
+but locally in the virtual environment.
+The consequence is that you have to activate this environment to use the applications it contains.
+
+Installation of python3-venv
+: sudo apt install python3-venv
+
+Creating the virtual environment:
+: python3 -m venv ~/prog/zephyrproject/zenv
+
+Activate this environment by calling:
+: source ~/prog/zephyrproject/zenv/bin/activate
+
+Since this is a bit cumbersome to remember and call we can create an
+alias. We edit/create the file ~~/.bash_aliases~ with
+the content
+: alias zenv="source ~/prog/zephyrproject/zenv/bin/activate"
+
+After that, we can activate the environment by typing ~zenv~.
+
+The environment is deactivated with
+: deactivate
+
+We activate the environment and continue.
+** Install Zephyr Sources
+West is the meta tool of Zephyr.
+: pip install west
+: cd ~/prog/zephyrproject
+: west init .
+: west update
+: west zephyr-export
+: pip install -r zephyr/scripts/requirements.txt
+** Install Zephyr SDK Toolchain(s)
+We install the minimal sdk variant: (v0.14.2) is to be replaced with the latest
+revision, see [[https://github.com/zephyrproject-rtos/sdk-ng/releases][Releases]]
+: wget https://github.com/zephyrproject-rtos/sdk-ng/releases/download/v0.14.2/zephyr-sdk-0.14.2_linux-x86_64_minimal.tar.gz
+: wget -O - https://github.com/zephyrproject-rtos/sdk-ng/releases/download/v0.14.2/sha256.sum | shasum --check --ignore-missing
+We unpack this archiv to ~~/bin~, which can also be written as ~$HOME/bin~:
+: tar -xvf zephyr-sdk-0.14.2_linux-x86_64_minimal.tar.gz -C ~/bin
+
+and run the ~setup.sh~ script:
+: cd ~/bin/zephyr-sdk-0.14.2
+: ./setup.sh -t arm-zephyr-eabi -h -c
+With this we install the toolchain for the ARM architecture which should be enough for now.  
+* Build a sample program
+cd ~/prog/zephyrproject/zephyr
+We build the ~hello_world~ example program as cortex m0 emulation.
+: west build -b qemu_cortex_m0 samples/hello_world
+Execution with qemu
+: west build -t run

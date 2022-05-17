@@ -1,0 +1,9 @@
+#+title: Home
+
+It is our goal to develop a self-sufficient communication system
+based on open source software.
+We want the [[https://zephyrproject.org/][Zephyr]] RTOS (Real Time Operating System)
+to be used. The hardware related programming can be a challenge
+for the beginner.
+We want to find together a way to understand the programming and
+hardware development step by step and example.

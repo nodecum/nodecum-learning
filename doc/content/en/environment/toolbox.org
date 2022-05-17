@@ -1,0 +1,40 @@
+#+title: Toolbox   
+#+weight: 20
+
+* Emacs - Editor
+As developers of software we will edit text files.
+For this we need a tool called an editor.
+We have chosen the [[https://www.gnu.org/software/emacs/][Emacs]] with good reason. We are going to
+create the program files as well as the documentation with it.
+
+
+We install the emacs package:
+: sudo snap install emacs  
+~sudo~ executes the following command as super-user=administrator.
+
+After the installation you can open the editor via the menu ~Development -> Emacs~.
+
+* Git - Version Control System
+Open Source Software would not work without a system which allows
+the coordination of the work of many developers working together on a project.
+Even as an individual you can gain many advantages from it:
+- Version control: old versions can be retrieved again
+- Distributed repositories: There is no central repository,
+  each copy contains the same information which can be mutually merged.
+- [[https://github.com]] is the central repository for many software projects,
+  one can search in the projects, contact the creators, engage oneself to
+  improve the software.
+
+As an example of how this can work we want to make a copy of the
+repository of this project. For this we first navigate
+with a web browser to the address: [[https://github.com/nodecum/nodecum-learning]].
+Because it is a public repository you can look at all the files inside it
+and also see their history. If you click on the green
+button *Code* you can select HTTPS and see the URL (web address) of the repository
+of the repository which you can copy as follows:
+
+: git clone https://github.com/nodecum/nodecum-learning.git
+
+With the https protocol you only get read access. If you want to publish your
+changes you can use the ssl protocol, but you need an account on account on [[https://github.com][Github]].
+

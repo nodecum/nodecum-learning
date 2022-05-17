@@ -1,0 +1,44 @@
+#+title: Documentation Writing
+#+weight: 40
+
+To write the documentation we use Emacs [[https://orgmode.org][Org-Mode]].
+The files are created under *doc/content*.
+We use [[https://gohugo.io][Hugo]] to create a static website from the org files.
+You do this locally and can track your changes with a web browser. 
+If you want the changes to take effect on the web server as well,
+then the changes of the repository are published on github (push).
+Via a so called webhook the webserver will be notified which will then
+fetch the changes of the repository and calls Hugo to recompile the website.
+After that the changes are available in the www net.
+* Repository
+** Cloning the repository
+This step must be done only the very first time!
+With https:
+: git clone https://github.com/nodecum/nodecum-learning.git
+or if you want to pass on changes with ssh:
+: git clone git@github.com:nodecum/nodecum-learning.git
+** Update the repository
+Before you make changes it is advisable to get the current state.
+: cd nodecum-learning
+: git pull
+
+
+* Org-Mode
+When generating the documentation the org files are parsed by
+[[https://github.com/niklasfasching/go-org][go-org]] which is a part of Hugo. See [[https://niklasfasching.github.io/go-org][go-org doc]] for supported org features.
+
+* Hugo
+[[https://gohugo.io][Hugo]] is a static website generator. This means the source files
+(in our case they are in the .org format) are converted to HTML files,
+which then represent the web pages. 
+** installation
+: snap install hugo --channel=extended
+** Compile
+To get a local web server which automatically updates to the last changed page:
+: cd nodecum-learning/doc
+: hugo server --navigateToChanged
+after that you can point your webbrowser to the address [[http://localhost:1313]] to view
+the web page. Every time you save an ~.org~ file in the directory ~content/~
+this will cause a recompilation of the corresponding HTML file.  
+
+
