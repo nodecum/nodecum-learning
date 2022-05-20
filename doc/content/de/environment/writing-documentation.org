@@ -17,6 +17,9 @@ Mit https:
 : git clone https://github.com/nodecum/nodecum-learning.git
 bzw wenn man dann auch Änderungen weitergeben will mit ssh:
 : git clone git@github.com:nodecum/nodecum-learning.git
+Zusätzlich müssen noch die Submodule geholt werden:
+: cd nodecum-learning
+: git submodule update --init --recursive
 ** Update des Repositories
 Bevor man Änderungen macht ist es ratsam sich den aktuellen Stand zu holen.
 : cd nodecum-learning
@@ -24,8 +27,26 @@ Bevor man Änderungen macht ist es ratsam sich den aktuellen Stand zu holen.
 
 
 * Org-Mode
-When generating the documentation the org files are parsed by
-[[https://github.com/niklasfasching/go-org][go-org]] which is a part of hugo. See [[https://niklasfasching.github.io/go-org][go-org doc]] for supported org features.
+
+Der [[https://orgmode.org/][Org-Mode]] ist ein für den Menschen einfach zu lesendes Text Format
+welches entwickelt wurde um mit den Möglichkeiten einfacher Text Dateien
+sehr effizient auch komplexe Strukturen abbilden zu können. Es wurde
+für den [[https://www.gnu.org/software/emacs/][Emacs]] Editor entwickelt und erlaubt zB das schnelle Navigieren, Auffalten
+und Einklappen von Strukturen, Datenbankähnliche Strukturierungen,
+Tabellierungen mittels einfacher Text Dateien. Das ist eine großer Vorteil
+gegenüber dedizierten Formaten, da man dadurch beliebige Versionierungs Software
+verwenden kann.
+Zum schreiben benutzen wir also den Org-Mode des Emacs. Man kann damit natürlich
+auch lesen und zb Suchen (grep).
+
+Wir schreiben die Dokumentation aber in einer Form das damit dann eine
+Web Browser lesbare Form (also HTML Dateien) erzeugt wird. Dafür benutzen
+wir [[https://github.com/niklasfasching/go-org][go-org]] welches ein Teil von Hugo, dem Webseiten Generator ist.
+Unter [[https://niklasfasching.github.io/go-org][go-org doc]] findet man die unterstützten Org Merkmale.
+** Hinweise
+- https://strm.sh/posts/org-mode-blogging/
+- https://willschenk.com/articles/2019/using_org_mode_in_hugo/
+
 
 * Hugo
 [[https://gohugo.io][Hugo]] ist ein statischer Webseiten Generator. Das bedeutet die Quelldateien

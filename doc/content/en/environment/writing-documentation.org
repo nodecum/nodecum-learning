@@ -17,6 +17,9 @@ With https:
 : git clone https://github.com/nodecum/nodecum-learning.git
 or if you want to pass on changes with ssh:
 : git clone git@github.com:nodecum/nodecum-learning.git
+We have to update the submodules it contains too:
+: cd nodecum-learning
+: git submodule update --init --recursive
 ** Update the repository
 Before you make changes it is advisable to get the current state.
 : cd nodecum-learning
