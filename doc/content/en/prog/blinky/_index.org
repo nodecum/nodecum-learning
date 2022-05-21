@@ -1,0 +1,3 @@
+#+title: Blinky
+
+This will be our first Zephyr Project: a blinking LED.

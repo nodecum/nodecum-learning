@@ -1,7 +1,9 @@
 ---
-title: Blinky
-weight: 10
+title: Setup
+weight: 5
 ---
+
+
 
 
 ``` goat
