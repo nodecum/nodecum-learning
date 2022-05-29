@@ -1,12 +1,18 @@
----
-title: Setup
-weight: 5
----
+#+title: Blinky
+#+weight: 10
+
+#+attr_html: :style line-height: 1.0;
+#+begin_src shell :noweb yes 
+  <<files>>
+#+end_src
+
+#+begin_src cmake -n :noweb yes
+  <<cmake>>
+#+end_src
 
 
-
-
-``` goat
+#+begin_export html
+{{% goat %}}
     +------------+   JTAG    +----------------+
 USB | BMP        +-o-------o-+ Adafruit       |
 o---+            |TX      RX | feather        |
@@ -14,9 +20,12 @@ o---+            |TX      RX | feather        |
     |            |RX      TX |                |
     |            +-o-------o-+                |
     |            |           |                |
-   	+------------+           +--+-------------+
-                                |
+    +------------+           +--+-------------+
                                 |
                                 o USB
-```			 		 
+{{% /goat %}}
+#+end_export
 
+# Local Variables:
+# eval: (org-babel-lob-ingest "blinky.en.org") 
+# End: 

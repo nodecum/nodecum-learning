@@ -1,0 +1,134 @@
+#+title: Blinky
+#+weight: 1
+
+Blinky is the "Hello World" sample program of the embedded world.
+Most embedded Devices have no display for writing a message, but a
+led which could be turned on and off is almost always a part of a
+development board.
+
+* Program files
+We start with the code given from the
+[[file:prog/blinky]] directory.
+
+#+begin_src bash :results output ; :eval no-export :exports results :wrap src shell
+  tree prog/blinky --noreport 
+#+end_src
+#+name: files
+#+attr_html: :style line-height: 1.0;
+#+results:
+#+begin_src shell
+prog/blinky
+├── CMakeLists.txt
+├── prj.conf
+└── src
+    └── main.c
+#+end_src
+
+** CMakeLists.txt
+#+name: cmake
+#+begin_src cmake -n 1 :tangle prog/blinky/CMakeLists.txt
+  cmake_minimum_required(VERSION 3.20.0)
+  find_package(Zephyr REQUIRED HINTS $ENV{ZEPHYR_BASE})
+  project(blinky)
+  target_sources(app PRIVATE src/main.c)
+#+end_src
+This file contains the information where to find the sources of the project.
+Here we have only one source file ~src/main.c~
+
+** prj.conf
+#+name: prj
+#+begin_src conf -n :tangle prog/blinky/prj.conf
+CONFIG_GPIO=y
+#+end_src
+The project configuration file tells which components of the kernel are needed
+and linked into the firmware.
+Here we need the ~GPIO~ - General Purpose In/Out Subsystem. 
+
+** main.c
+#+name: main-1
+#+begin_src C -n 
+/*
+ * Copyright (c) 2016 Intel Corporation
+ *
+ * SPDX-License-Identifier: Apache-2.0
+ */
+#+end_src
+This is the copyright remark. In C the ~/*~ starts an comment which
+is closed by an corresponding ~*/~. This kind of comments can
+span over multiple lines whereas an ~//~ double slash gives room for
+comments until the line ends.
+#+name: main-2
+#+begin_src C +n
+#include <zephyr.h>
+#include <drivers/gpio.h>
+#+end_src
+All keywords in C which start with ~#~ are preprocessor
+directives. ~#include <file.h>~ loads an so called
+header file which contains the interface of declarations
+we will make use of. If ~<~ and ~>~ are used to surround
+the filename the path to the file will be search by the compiler
+using the given include pathes. (In opposite if the file is
+enclosed with ~"~ then the path is relative to the file which
+contains the include directive.
+#+name: main-3
+#+begin_src C +n
+/* 1000 msec = 1 sec */
+#define SLEEP_TIME_MS   1000
+
+/* The devicetree node identifier for the "led0" alias. */
+#define LED0_NODE DT_ALIAS(led0)
+#+end_src
+Here again we have a preprocessor directive. ~#define PLACEHOLDER value~ creates an
+macro which simply replaces all occurences of ~PLACEHOLDER~ with the given ~value~.
+Usually the placeholders are writen with capitals, but this is not mandatory. It is often
+made this way for distinct macros from functions which are often written with lower case
+letters.
+
+Macros can also be defined to have arguments. Here we use such a macro ~DT_ALIAS~
+with argument ~led0~ as value for our macro ~LED0_NODE~.
+~led0~ is an alias which has to be defined for the board we use and describes on
+which port and pin the led0 is connected.
+#+name: main-4
+#+begin_src C +n
+/*
+ * A build error on this line means your board is unsupported.
+ * See the sample documentation for information on how to fix this.
+ */
+static const struct gpio_dt_spec led = GPIO_DT_SPEC_GET(LED0_NODE, gpios);
+#+end_src
+This C declaration declares an identifier ~led0~ for a fixed (~static~) portion of
+read only (~const~) memory which can contain structured data (~struct~) defined
+with the name ~gpio_dt_spec~ and initialized with the result of the macro call
+~GPIO_DT_SPEC_GET(LED0_NODE, gpios)~.  
+#+name: main-5
+#+begin_src C +n 
+  void main(void)
+  {
+    int ret;
+
+    if (!device_is_ready(led.port)) {
+      return;
+    }
+
+    ret = gpio_pin_configure_dt(&led, GPIO_OUTPUT_ACTIVE);
+    if (ret < 0) {
+      return;
+    }
+
+    while (1) {
+      ret = gpio_pin_toggle_dt(&led);
+      if (ret < 0) {
+	return;
+      }
+      k_msleep(SLEEP_TIME_MS);
+    }
+  }
+#+end_src
+
+#+BEGIN_SRC C :tangle prog/src/main.c :noweb yes 
+  <<main-1>>
+  <<main-2>>
+  <<main-3>>
+  <<main-4>>
+  <<main-5>>
+#+END_SRC
