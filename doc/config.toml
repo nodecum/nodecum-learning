@@ -5,12 +5,12 @@ defaultContentLanguage = 'en'
 [languages]
   [languages.en]
     languageName = 'English'
-    contentDir = 'content/en'
+#    contentDir = 'content/en'
     weight = 1
     title = 'nodecum - learning'
   [languages.de]
     languageName = 'Deutsch'
-    contentDir = 'content/de' 
+#    contentDir = 'content/de' 
     weight = 2
     title = 'nodecum - lernen'
 
