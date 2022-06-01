@@ -30,8 +30,6 @@
 	  (f-dirname (f-relative buffer-file-name (concat org-dom-dir "org"))))
     (if (equal org-hugo-default-section-directory "./")
 	(setq org-hugo-default-section-directory "/"))
-    (message "basedir: %s" org-hugo-base-dir)
-    (message "section: %s" org-hugo-default-section-directory)
     ;; if we have an .de.org file and it exists an
     ;; corresponding .en.org file than set the library of babel
     ;; to the .en.org file to allow refering to the en code blocks.
