@@ -10,6 +10,7 @@
 (add-to-list 'load-path (f-dirname load-file-name))
 
 (require 'nodecum-org-hugo-export) 
+(require 'ob-svgbob)
 ;; we do not allow local variables
 (setq enable-local-variables nil)
 
