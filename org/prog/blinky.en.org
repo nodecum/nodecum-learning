@@ -45,6 +45,8 @@ and linked into the firmware.
 Here we need the ~GPIO~ - General Purpose In/Out Subsystem. 
 
 ** main.c
+~main.c~ is the name of the main source file of our program which
+is written in the C programming language.
 #+name: main-1
 #+begin_src C -n 
 /*
@@ -67,7 +69,7 @@ directives. ~#include <file.h>~ loads an so called
 header file which contains the interface of declarations
 we will make use of. If ~<~ and ~>~ are used to surround
 the filename the path to the file will be search by the compiler
-using the given include pathes. (In opposite if the file is
+using the given include pathes. In opposite if the file is
 enclosed with ~"~ then the path is relative to the file which
 contains the include directive.
 #+name: main-3
@@ -81,13 +83,13 @@ contains the include directive.
 Here again we have a preprocessor directive. ~#define PLACEHOLDER value~ creates an
 macro which simply replaces all occurences of ~PLACEHOLDER~ with the given ~value~.
 Usually the placeholders are writen with capitals, but this is not mandatory. It is often
-made this way for distinct macros from functions which are often written with lower case
-letters.
+made this way for distinct macros from functions and variables which are often written with
+lower case letters.
 
 Macros can also be defined to have arguments. Here we use such a macro ~DT_ALIAS~
 with argument ~led0~ as value for our macro ~LED0_NODE~.
 ~led0~ is an alias which has to be defined for the board we use and describes on
-which port and pin the led0 is connected.
+which port and pin the led 0 (Light Emiting Diode) is connected.
 #+name: main-4
 #+begin_src C +n
 /*
@@ -104,31 +106,112 @@ with the name ~gpio_dt_spec~ and initialized with the result of the macro call
 #+begin_src C +n 
   void main(void)
   {
+#+end_src
+Here we define our main routine of the program, ~void main(void)~ is the so called entry
+point which will be called to start the application. ~void~ designates an no value thus this
+function will not return a value and will not have any argument. Writing ~void main()~ is
+equvalent to the former form with an ~void~ argument. The body of the function will be enclosed
+in the curly brackets ~{}~.
+#+name: main-6
+#+begin_src C +n -i
     int ret;
-
+#+end_src
+This line says that we reserve memory for holding an integer - ~int~
+value which can be accessed with name ~ret~. This is uninitialized
+memory, so no specific value was written there up to now. 
+#+name: main-7 
+#+begin_src C +n -i
     if (!device_is_ready(led.port)) {
       return;
     }
-
+#+end_src
+Here we have a conditional clause called ~if~. If the condition in
+the parentheses is true, then the statements following the curly braces
+are executed. 
+Conditionals are described on [[file:~/prog/nodecum.org/nodecum-learning/org/static/books/c-prog-lang.pdf#page=79][page 79 in the C Programming Language]].
+Zephyr follows at least the C99 specification which has added the support
+of boolean values with the type ~bool~ to the language.
+(See [[https://docs.zephyrproject.org/latest/develop/languages/c/index.html][C Language Support]])
+The exclamation mark ~!~ is a negation operator,
+this will result to the behavior that
+if the function ~device_is_ready~ returns false, which means that the
+device is not ready for use, than the directly following statement ( here
+the block ~{ return; }~ will be executed.
+See [[https://docs.zephyrproject.org/latest/doxygen/html/group__device__model.html][here]] for the description of the ~device_is_ready~ function.
+~return~ will leave our ~main~ function, thus will end our program.
+This means, in case that the device could not be initialized correctly,
+our program will be terminated here.
+#+name: main-8
+#+begin_src C +n -i
     ret = gpio_pin_configure_dt(&led, GPIO_OUTPUT_ACTIVE);
     if (ret < 0) {
       return;
     }
-
+#+end_src
+Calling ~gpio_pin_configure_dt~ and store the integer result into ~ret~. 
+Looking up the documentation of ~gpio_pin_configure_dt~ in 
+[[https://docs.zephyrproject.org/latest/doxygen/html/group__gpio__interface.html][GPIO Driver APIs]] shows that the function returns zero on success and negative
+values which describe the occured error conditions. ~GPIO_OUTPUT_ACTIVE~
+configures the specified GPIO pin as output and initializes it to a logic 1. 
+Again the program will be terminated by calling ~return~ if an error has occured.
+#+name: main-9
+#+begin_src C +n -i
     while (1) {
       ret = gpio_pin_toggle_dt(&led);
       if (ret < 0) {
-	return;
+        return;
       }
       k_msleep(SLEEP_TIME_MS);
     }
+#+end_src
+The ~while~ keyword describes a 'while' loop, if the condition in the braces ~( 1 )~
+is true ( not zero ), the following statement, ~{ ... }~ will be executed.
+Here the condition is always true, thus at the first glance an never ending
+loop was programmed. But if we look further we see that if ~gpio_pin_toggle_dt~
+will return an error condition (~ret < 0~ ), ~return~ will be called which causes
+the termination of the ~main~ function.
+Calling ~gpio_pin_toggle_dt~ will vary the state of the pin between high and low,
+lighting the LED or switching it off.
+
+~k_msleep~ puts the current thread to sleep for the time given in milliseconds.
+This means that the execution will be stoped for the given time. After this the pin
+will be toggled again and so on.
+#+name: main-10
+#+begin_src C +n -i
   }
 #+end_src
+The closing brace of the body of the ~main~ function declaration.
 
-#+BEGIN_SRC C :tangle prog/src/main.c :noweb yes 
+Here is the complete listing of the program:
+#+BEGIN_SRC C -n -i :tangle prog/src/main.c :noweb yes 
   <<main-1>>
   <<main-2>>
   <<main-3>>
   <<main-4>>
   <<main-5>>
+  <<main-6>>
+  <<main-7>>
+  <<main-8>>
+  <<main-9>>
+  <<main-10>>
 #+END_SRC
+* Build the program
+
+* Transfer the program 
+
+#+begin_src svgbob  :cmd svgbob_cli :file ../static/images/blinky.svg :eval no-export 
+	  +------------+   JTAG    +----------------+
+      USB | Black      +-o-------o-+ Adafruit       |
+      o---+ Magic      |TX      RX | feather        |
+	  | Probe      +-o-------o-+ nrf52840       |
+	  |            |RX      TX |                |
+	  |            +-o-------o-+                |
+	  |            |           |                |
+	  +------------+           +--+-------------+
+                                      |
+                                      o USB	
+#+end_src  
+ 
+#+results:
+[[file:../static/images/blinky.svg]]
+

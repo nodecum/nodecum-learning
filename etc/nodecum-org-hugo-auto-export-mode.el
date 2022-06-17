@@ -20,6 +20,7 @@
 
 ;;; Code:
 
+(require 'nodecum-org-hugo-export)
 
 ;;;###autoload
 (define-minor-mode nodecum-org-hugo-auto-export-mode

@@ -40,6 +40,8 @@
 	      (org-babel-lob-ingest fpath-en))
 	  )
       )
+    ;; disable auto copying
+    (setq org-hugo-external-file-extensions-allowed-for-copying (list "svg" "pdf"))
     (org-hugo-export-to-md)
     )
   )

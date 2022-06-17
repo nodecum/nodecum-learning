@@ -1,31 +1,88 @@
 #+title: Blinky
-#+weight: 10
+#+weight: 1
+#+hugo_paired_shortcodes: rawhtml
+
+Blinky ist das "Hallo Welt" Beispiel Programm der Embedded Welt.
+Die meisten Entwicklungsboards haben nicht unbedingt eine Anzeige
+um darauf etwas darzustellen und eine solche anzusteuern ist ja
+auch schon recht komplex. Viel einfacher und oft vorhanden ist hingegen
+eine Leuchtdiode - und diese kann man blinken lassen.
+
+* Programm Dateien
+
+Wir schauen uns die Dateien an welche im Verzeichniss
+[[file:prog/blinky]] zu finden sind.
 
 #+attr_html: :style line-height: 1.0;
 #+begin_src shell :noweb yes 
   <<files>>
 #+end_src
 
+** CMakeLists.txt
 #+begin_src cmake -n :noweb yes
   <<cmake>>
 #+end_src
+Diese Datei, welche vom ~cmake~ Build System gelesen wird beschreibt den
+Namen des Projektes und wo sich die Quellen des Projektes, hier ~src/main.c~
+befinden.
 
+** prj.conf
+#+begin_src conf -n :noweb yes
+  <<prj>>
+#+end_src
+Die Projektkonfigurationsdatei gibt an, welche Komponenten des Kernels benötigt werden.
+Diese werden dann mit in die Firmware eingebunden.
+Hier benötigen wir das ~GPIO~ - General Purpose In/Out Subsystem.
+** main.c
+~main.c~ ist die Hauptdatei unseres Programmes, welche in der Sprache C geschrieben ist.
+#+begin_src C -n :noweb yes
+  <<main-1>>
+#+end_src
+Dies ist der Urheberrechtshinweis. In C beginnt der Schrägstrich und der Stern ~/*~ einen Kommentar,
+welcher durch ein entsprechenden Schrägstrich und Stern  ~*/~ wieder geschlossen wird.
+Diese Art von Kommentar kann sich über mehrere Zeilen erstrecken,
+während ein ~//~ Doppelschrägstrich Platz für Kommentare bis zum Ende der Zeile gibt.
+#+begin_src C -n :noweb yes
+  <<main-2>>
+#+end_src
 
-#+begin_export html
-{{% goat %}}
-    +------------+   JTAG    +----------------+
-USB | BMP        +-o-------o-+ Adafruit       |
-o---+            |TX      RX | feather        |
-    |            +-o-------o-+ nrf52840       |
-    |            |RX      TX |                |
-    |            +-o-------o-+                |
-    |            |           |                |
-    +------------+           +--+-------------+
-                                |
-                                o USB
-{{% /goat %}}
-#+end_export
+Alle Schlüsselwörter in C, die mit ~#~ beginnen, sind Präprozessor
+Direktiven. ~#include <file.h>~ lädt eine Header-Datei, welche die
+Schnittstelle von Deklarationen enthält die wir verwenden möchten.
+Wenn ~<~ und ~>~ zur Begrenzung des File Namens verwendet werden,
+dann werden die dem Compiler übergebenen Such Pfade verwendet um die Datei
+zu finden. Wird die Datei im Gegensatz dazu mit ~"~ umgeben, dann ist
+der Pfad relativ zu der Datei, welche die Include - Direktive enhält.
+
+#+begin_src C -n :noweb yes
+  <<main-3>>
+#+end_src
+
+Auch hier haben wir eine Präprozessordirektive. ~#define PLATZHALTER wert~ erzeugt ein
+Makro, welches alle Vorkommen von ~PLATZHALTER~ durch den angegebenen ~wert~ ersetzt.
+Normalerweise werden die Platzhalter mit Großbuchstaben geschrieben, dies ist jedoch nicht
+zwingend erforderlich. Es wird so oft gemacht um auf diese Weise die Makros von Funktionen
+und Variablen zu unterscheiden, welche oft mit Kleinbuchstaben geschrieben werden.
+
+Es können auch Makros definiert werden, welche Argumente haben. Hier verwenden wir ein solches
+Makro ~DT_ALIAS~ mit dem Argument ~led0~ als Wert für unser Makro ~LED0_NODE~.
+~led0~ ist ein Alias, der für das Board was wir verwenden angibt, an welchem Port und Pin
+die LED 0  (LED - light emiting diode - Leuchtdiode) angeschlossen ist.
+
+#+begin_src C -n :noweb yes
+  <<main-4>>
+#+end_src
+Diese C-Deklaration deklariert einen Bezeichner ~led0~ für einen fixen (~static~)
+Bereich des "nur lese" (read only - ~const~) Speicherbereiches,
+der strukturierte Daten (~struct~) der Form ~gpio_dt_spec~ aufnimmt
+ und mit dem Ergebnis des Makroaufrufs 
+~GPIO_DT_SPEC_GET(LED0_NODE, gpios)~ initialisiert wird.  
+#+begin_src C -n :noweb yes
+  <<main-5>>
+#+end_src
+
 
 # Local Variables:
 # eval: (org-babel-lob-ingest "blinky.en.org") 
 # End: 
+
