@@ -183,7 +183,7 @@ will be toggled again and so on.
 The closing brace of the body of the ~main~ function declaration.
 
 Here is the complete listing of the program:
-#+BEGIN_SRC C -n -i :tangle prog/src/main.c :noweb yes 
+#+BEGIN_SRC C -n -i :tangle prog/blinky/src/main.c :noweb yes 
   <<main-1>>
   <<main-2>>
   <<main-3>>
@@ -195,7 +195,7 @@ Here is the complete listing of the program:
   <<main-9>>
   <<main-10>>
 #+END_SRC
-* Build the program
+* Building the program
 
 
 * Transfer the program 

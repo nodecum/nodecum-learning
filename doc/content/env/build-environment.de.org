@@ -94,4 +94,20 @@ Wir bauen das ~hello_world~ Beispielprogram als cortex m0 Emulation.
 : west build -b qemu_cortex_m0 samples/hello_world
 Ausführung mit qemu
 : west build -t run
+* Zephyr aktualisieren
+Von Zeit zu Zeit möchten wir Zephyr und die dazugehörige Umgebung aktualisieren.
+Das bewerkstelligen wir indem wir den aktuellen Stand vom Zephyr Repositry auf github
+holen (pull=ziehen) und mit ~west~ ein update durchführen:
+: cd ~/prog/zephyrproject/zephyr
+: git pull
+: west update
+* Umgebungs Variablen setzen
+Wir folgen dem Vorgehen welches in [[https://docs.zephyrproject.org/latest/develop/env_vars.html#env-vars][Setting Variables]] beschrieben ist.
+Zuerst erweitern wir den ~zenv~ alias im file ~~/.bash_aliases~
+um einen zweiten ~source~ Aufruf
+: alias zenv="source ~/prog/zephyrproject/zenv/bin/activate && source ~/prog/zephyrproject/zephyr/zephyr-env.sh"
+Nun können wir mit dem alias ~zenv~ die Python Umgebung aktivieren und
+die Umgebungs Variablen setzen.
+Diese werden in der Datei ~~/.zephyrrc~ gesetzt:
+: export ZEPHYR_BASE=~/prog/zephyrproject/zephyr 
 

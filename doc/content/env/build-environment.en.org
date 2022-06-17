@@ -89,8 +89,24 @@ and run the ~setup.sh~ script:
 : ./setup.sh -t arm-zephyr-eabi -h -c
 With this we install the toolchain for the ARM architecture which should be enough for now.  
 * Build a sample program
-cd ~/prog/zephyrproject/zephyr
+: cd ~/prog/zephyrproject/zephyr
 We build the ~hello_world~ example program as cortex m0 emulation.
 : west build -b qemu_cortex_m0 samples/hello_world
 Execution with qemu
 : west build -t run
+
+* Update Zephyr
+From time to time we might update Zephyr and our build evironment. We can do this
+by pulling the latest changes from github and running west update:
+: cd ~/prog/zephyrproject/zephyr
+: git pull
+: west update
+* Setting Environment Variables
+We follow the hints given in [[https://docs.zephyrproject.org/latest/develop/env_vars.html#env-vars][Setting Variables]].
+First we extend the ~zenv~ alias in file ~~/.bash_aliases~ with
+the content
+: alias zenv="source ~/prog/zephyrproject/zenv/bin/activate && source ~/prog/zephyrproject/zephyr/zephyr-env.sh"
+Now we only have to using the ~zenv~ alias to activate the python evironment and setting
+the environment variables.
+The environment variables will be set in the file ~~/.zephyrrc~ to
+: export ZEPHYR_BASE=~/prog/zephyrproject/zephyr 
