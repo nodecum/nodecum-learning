@@ -128,7 +128,7 @@ memory, so no specific value was written there up to now.
 Here we have a conditional clause called ~if~. If the condition in
 the parentheses is true, then the statements following the curly braces
 are executed. 
-Conditionals are described on [[file:~/prog/nodecum.org/nodecum-learning/org/static/books/c-prog-lang.pdf#page=79][page 79 in the C Programming Language]].
+Conditionals are described on [[file:~/prog/nodecum.org/nodecum-learning/org/static/books/c-prog-lang.pdf][page 79 in the C Programming Language]].
 Zephyr follows at least the C99 specification which has added the support
 of boolean values with the type ~bool~ to the language.
 (See [[https://docs.zephyrproject.org/latest/develop/languages/c/index.html][C Language Support]])
