@@ -181,11 +181,12 @@ This means that the execution will be stoped for the given time. After this the 
 will be toggled again and so on.
 #+name: main-10
 #+begin_src C +n -i
-  }
+}
 #+end_src
 The closing brace of the body of the ~main~ function declaration.
 
 Here is the complete listing of the program:
+#+name: main-11
 #+BEGIN_SRC C -n -i :tangle prog/blinky/src/main.c :noweb yes 
   <<main-1>>
   <<main-2>>

@@ -82,7 +82,82 @@ der strukturierte Daten (~struct~) der Form ~gpio_dt_spec~ aufnimmt
 #+begin_src C -n :noweb yes
   <<main-5>>
 #+end_src
+Hier definieren wir unsere Hauptroutine des Programms, ~void main(void)~ ist der so genannte Einstiegspunkt,
+der aufgerufen wird, um die Anwendung zu starten.
+~void~ bezeichnet einen Nullwert, daher wird diese
+Funktion keinen Wert zurückgeben und auch kein Argument haben.
+Das Schreiben von ~void main()~ ist
+gleichbedeutend mit der vorherigen Form mit einem ~void~ Argument.
+Der Körper der Funktion wird eingeschlossen
+in die geschweiften Klammern ~{}~.
+#+begin_src C -n :noweb yes
+  <<main-6>>
+#+end_src
+Diese Zeile besagt, dass wir Speicher für die Aufnahme eines ganzzahligen (Integer - ~int~ )
+Wertes benötigen, auf den mit dem Namen ~ret~ zugegriffen werden kann.
+Dies ist ein uninitialisierter
+Speicherplatz, d.h. es wurde bisher kein bestimmter Wert dorthin geschrieben. 
+#+begin_src C -n :noweb yes
+  <<main-7>>
+#+end_src
+Hier haben wir eine Bedingungsklausel namens ~if~. Wenn die Bedingung in
+der Klammer wahr ist, dann werden die Anweisungen in den geschweiften Klammern
+ausgeführt. 
+Bedingte Klauseln werden auf [[pdf:../static/books/c-prog-lang.pdf::79][Seite 79 in "Die Programmiersprache C"]]
+beschrieben.
+Zephyr folgt mindestens der C99-Spezifikation in welcher die Unterstützung
+von booleschen Werten mit dem Typ ~bool~ in die Sprache aufgenommen hat.
+(Siehe [[https://docs.zephyrproject.org/latest/develop/languages/c/index.html][C-Sprachunterstützung]])
+Das Ausrufezeichen ~!~ ist ein Negationsoperator welcher bewirkt dass,
+wenn die Funktion ~device_is_ready~ false zurückgibt, was bedeutet, dass das
+Gerät nicht einsatzbereit ist, die direkt folgende Anweisung (hier
+der Block ~{ return; }~ ausgeführt wird.
+Siehe [[https://docs.zephyrproject.org/latest/doxygen/html/group__device__model.html][hier]]
+für die Beschreibung der ~device_is_ready~ Funktion.
+Mit dem Aufruf von ~return~ wird unsere ~main~ Funktion verlassen,
+also unser Programm beendet.
+Das heißt, falls das Gerät nicht korrekt initialisiert werden konnte,
+wird unser Programm hier beendet.
+#+begin_src C -n :noweb yes
+  <<main-8>>
+#+end_src
+Aufruf der Funktion ~gpio_pin_configure_dt~ und abspeichern des Integer-Ergebnisses in
+der Variablen ~ret~. 
+Ein Blick in die Dokumentation von ~gpio_pin_configure_dt~ in 
+[[https://docs.zephyrproject.org/latest/doxygen/html/group__gpio__interface.html][GPIO Driver APIs]]
+zeigt, dass die Funktion bei Erfolg Null und bei Mißerfolg negative
+Werte zurückgibt, welche die aufgetretenen Fehlerbedingungen beschreiben.
+~GPIO_OUTPUT_ACTIVE~ konfiguriert den angegebenen GPIO-Pin als Ausgang und
+initialisiert ihn auf eine logische 1. 
+Auch hier wird das Programm durch den Aufruf von ~return~ beendet,
+falls ein Fehler aufgetreten sein sollte.
+#+begin_src C -n :noweb yes
+  <<main-9>>
+#+end_src
+Das Schlüsselwort ~while~ beschreibt eine 'while'-Schleife,
+solange die Bedingung in den geschweiften Klammern ~( 1 )~
+wahr ist ( d.h. nicht Null ist ), wird die folgende Anweisung, ~{ ... }~ ausgeführt werden.
+Hier ist die Bedingung immer wahr, also auf den ersten Blick eine nie endende
+Schleife programmiert worden. Aber wenn wir weiter schauen dann sehen wir,
+dass wenn ~gpio_pin_toggle_dt~ eine Fehlerbedingung zurückgibt (~ret < 0~ ),
+dann wird ~return~ aufgerufen, was zum
+die Beenden der ~main~ Funktion führt.
+Der Aufruf von ~gpio_pin_toggle_dt~ verändert den Zustand des Pins
+zwischen high und low -- die LED wird ein oder ausgeschaltet.
 
+~k_msleep~ versetzt den aktuellen Thread für die in Millisekunden angegebene
+Zeit in den Schlaf.
+Das bedeutet, dass die Ausführung für die angegebene Zeit angehalten wird.
+Danach wird der Pin wieder umgeschaltet werden und so weiter.
+#+begin_src C -n :noweb yes
+  <<main-10>>
+#+end_src
+Die abschließende Klammer den Körper der ~main~ Funktionsdeklaration.
+
+Hier ist das vollständige Programms:
+#+begin_src C -n :noweb yes
+  <<main-11>>
+#+end_src
 
 # Local Variables:
 # eval: (org-babel-lob-ingest "blinky.en.org") 
