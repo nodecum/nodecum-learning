@@ -1,6 +1,8 @@
-#+title: Blinky
-#+weight: 1
-#+hugo_paired_shortcodes: rawhtml
+* Blinki
+:PROPERTIES:
+:EXPORT_FILE_NAME: blinky.de.md
+:EXPORT_HUGO_WEIGHT: 10
+:END:
 
 Blinky ist das "Hallo Welt" Beispiel Programm der Embedded Welt.
 Die meisten Entwicklungsboards haben nicht unbedingt eine Anzeige
@@ -8,7 +10,7 @@ um darauf etwas darzustellen und eine solche anzusteuern ist ja
 auch schon recht komplex. Viel einfacher und oft vorhanden ist hingegen
 eine Leuchtdiode - und diese kann man blinken lassen.
 
-* Programm Dateien
+** Programm Dateien
 
 Wir schauen uns die Dateien an welche im Verzeichniss
 [[file:prog/blinky]] zu finden sind.
@@ -18,7 +20,7 @@ Wir schauen uns die Dateien an welche im Verzeichniss
   <<files>>
 #+end_src
 
-** CMakeLists.txt
+*** CMakeLists.txt
 #+begin_src cmake -n :noweb yes
   <<cmake>>
 #+end_src
@@ -26,14 +28,14 @@ Diese Datei, welche vom ~cmake~ Build System gelesen wird beschreibt den
 Namen des Projektes und wo sich die Quellen des Projektes, hier ~src/main.c~
 befinden.
 
-** prj.conf
+*** prj.conf
 #+begin_src conf -n :noweb yes
   <<prj>>
 #+end_src
 Die Projektkonfigurationsdatei gibt an, welche Komponenten des Kernels benötigt werden.
 Diese werden dann mit in die Firmware eingebunden.
 Hier benötigen wir das ~GPIO~ - General Purpose In/Out Subsystem.
-** main.c
+*** main.c
 ~main.c~ ist die Hauptdatei unseres Programmes, welche in der Sprache C geschrieben ist.
 #+begin_src C -n :noweb yes
   <<main-1>>

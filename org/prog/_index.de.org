@@ -1,8 +1,6 @@
-* Umgebung
+* Programmierung
 :PROPERTIES:
 :EXPORT_FILE_NAME: _index.de.md
-:EXPORT_HUGO_WEIGHT: 10
+:EXPORT_HUGO_WEIGHT: 20
 :END:
 
-
- 

@@ -1,6 +1,8 @@
-#+title: Dokumentation Schreiben
-#+weight: 40
-
+* Dokumentation Schreiben
+:PROPERTIES:
+:EXPORT_FILE_NAME: writing-documentation.de.md
+:EXPORT_HUGO_WEIGHT: 40
+:END:
 Um die Dokumentation zu schreiben benutzen wir den Emacs [[https://orgmode.org][Org-Mode]].
 Die Dateien werden unter *doc/content* angelegt.
 Wir benutzen [[https://gohugo.io][Hugo]] um aus den org files eine statische Website zu erzeugen.
@@ -10,8 +12,8 @@ dann werden die Änderungen des Repositories auf github publiziert (push).
 Über einen sogenannten webhook wird der Webserver benachrichtigt welcher sich
 daraufhin die Änderungen des Repositories holt, Hugo aufruft um die Website neu
 zu übersetzen. Dannach sind die Änderungen im www Netz verfügbar.
-* Repository
-** Klonen des Repositories
+** Repository
+*** Klonen des Repositories
 Dieser Schritt muss nur beim allerersten mal erfolgen!
 Mit https:
 : git clone https://github.com/nodecum/nodecum-learning.git
@@ -20,13 +22,13 @@ bzw wenn man dann auch Änderungen weitergeben will mit ssh:
 Zusätzlich müssen noch die Submodule geholt werden:
 : cd nodecum-learning
 : git submodule update --init --recursive
-** Update des Repositories
+*** Update des Repositories
 Bevor man Änderungen macht ist es ratsam sich den aktuellen Stand zu holen.
 : cd nodecum-learning
 : git pull
 
 
-* Org-Mode
+** Org-Mode
 
 Der [[https://orgmode.org/][Org-Mode]] ist ein für den Menschen einfach zu lesendes Text Format
 welches entwickelt wurde um mit den Möglichkeiten einfacher Text Dateien
@@ -43,18 +45,18 @@ Wir schreiben die Dokumentation aber in einer Form das damit dann eine
 Web Browser lesbare Form (also HTML Dateien) erzeugt wird. Dafür benutzen
 wir [[https://github.com/niklasfasching/go-org][go-org]] welches ein Teil von Hugo, dem Webseiten Generator ist.
 Unter [[https://niklasfasching.github.io/go-org][go-org doc]] findet man die unterstützten Org Merkmale.
-** Hinweise
+*** Hinweise
 - https://strm.sh/posts/org-mode-blogging/
 - https://willschenk.com/articles/2019/using_org_mode_in_hugo/
 
 
-* Hugo
+** Hugo
 [[https://gohugo.io][Hugo]] ist ein statischer Webseiten Generator. Das bedeutet die Quelldateien
 (in unserem Fall im .org Format) werden in HTML Dateien umgewandelt, welche dann
 die Webseiten darstellen. 
-** Installation
+*** Installation
 : snap install hugo --channel=extended
-** Compilieren
+*** Compilieren
 Um einen lokalen Webserver zu erhalten welcher die zuletzt geänderte Seite automatisch
 neu übersetzt:
 : cd nodecum-learning/doc

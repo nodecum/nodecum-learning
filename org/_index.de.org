@@ -1,4 +1,7 @@
-#+title: Home
+* Vorwort
+:PROPERTIES:
+:EXPORT_FILE_NAME: _index.de.md
+:END:
 
 Unser Ziel ist die Entwicklung eines auf Open Source basierenden
 autarken Kommunikationssystems.

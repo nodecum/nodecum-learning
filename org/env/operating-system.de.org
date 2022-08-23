@@ -1,10 +1,12 @@
-#+title: Betriebssystem
-#+weight: 10
-
+* Betriebssystem
+:PROPERTIES:
+:EXPORT_FILE_NAME: operating-system.de.md
+:EXPORT_HUGO_WEIGHT: 10
+:END: 
 Wir wollen für die Entwicklung von Open Source Sofware auch ebensolche einsetzen,
 deshalb beschreiben wir das Vorgehen anhand von Linux. Wir benutzen Ubuntu, andere
 Distributionen sollten sich ähnlich verhalten.
-* Das Terminal
+** Das Terminal
 Früher hat man mit einem Rechner über ein Terminal kommuniziert. Das ist wie eine
 Schreibmaschine mit Bildschirm. Man gibt Befehle ein und erhält eine Ausgabe auf
 dem Bildschirm zurück. Wir werden diesem Konzept noch oft begegnen. Es ist wenn
@@ -19,7 +21,7 @@ ermöglicht. Wir finden ein solches zB. im Menü ~Systemwerkzeuge -> QTerminal~.
 Mit diesem Programm können wir sogar mehrere Terminal Sitzungen parallel geöffnet halten
 (~<Ctrl+Shift+Tab>~ erzeugt eine zusätzliche Sitzung).
 
-* Die Shell
+** Die Shell
 Das Programm welches unsere Eingaben verwertet und uns wieder etwas zurück gibt wird als
 Shell (Schale) bezeichnet. In unserem Fall ist das konkret die Bash (Bourne Again Shell)
 welche meist standardmäßig konfiguriert ist.
@@ -32,7 +34,7 @@ wieder hervor holen und auch verändern (editieren) kann. Desweiteren ist die Ta
 ein Wertvoller Gefährte, mit ihr kann man Befehle oder auch Dateinamen vervollständigen (completion).
 Das spart viel Schreibarbeit und schützt vor Tippfehlern.
 
-* Programme installieren
+** Programme installieren
 Für die Installation von Programmen, in diesem Kontext auch Pakete genannt werden wir 
 Paket-Verwalter (Package Manager) wie ~apt~ und ~snap~ verwenden. Während ~apt~
 Software Versionen anbietet die sich gut in die Linux Distribution einbinden so ist
