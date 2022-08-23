@@ -1,5 +1,6 @@
 #! /bin/sh
 ":"; exec emacs --script "$0" -- "$@" # -*- mode:emacs-lisp -*-
+;; give the directory which contains the org files as argument
 
 (require 'package)
 (package-initialize)
