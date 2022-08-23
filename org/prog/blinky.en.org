@@ -1,12 +1,15 @@
-#+title: Blinky
-#+weight: 1
+* Blinky
+:PROPERTIES:
+:EXPORT_FILE_NAME: blinky.en.md
+:EXPORT_HUGO_WEIGHT: 10
+:END:
 
 Blinky is the "Hello World" sample program of the embedded world.
 Most embedded Devices have no display for writing a message, but a
 led which could be turned on and off is almost always a part of a
 development board.
 
-* Program files
+** Program files
 We start with the code given from the
 [[file:prog/blinky]] directory.
 
@@ -24,7 +27,7 @@ prog/blinky
     └── main.c
 #+end_src
 
-** CMakeLists.txt
+*** CMakeLists.txt
 #+name: cmake
 #+begin_src cmake -n 1 :tangle prog/blinky/CMakeLists.txt
   cmake_minimum_required(VERSION 3.20.0)
@@ -35,7 +38,7 @@ prog/blinky
 This file contains the information where to find the sources of the project.
 Here we have only one source file ~src/main.c~
 
-** prj.conf
+*** prj.conf
 #+name: prj
 #+begin_src conf -n :tangle prog/blinky/prj.conf
 CONFIG_GPIO=y
@@ -44,7 +47,7 @@ The project configuration file tells which components of the kernel are needed
 and linked into the firmware.
 Here we need the ~GPIO~ - General Purpose In/Out Subsystem. 
 
-** main.c
+*** main.c
 ~main.c~ is the name of the main source file of our program which
 is written in the C programming language.
 #+name: main-1
@@ -68,9 +71,9 @@ All keywords in C which start with ~#~ are preprocessor
 directives. ~#include <file.h>~ loads an so called
 header file which contains the interface of declarations
 we will make use of. If ~<~ and ~>~ are used to surround
-the filename the path to the file will be search by the compiler
-using the given include pathes. In opposite if the file is
-enclosed with ~"~ then the path is relative to the file which
+the filename, the path to the file will be searched by the preprocessor/compiler
+using the given include pathes. In opposite, if the file is
+enclosed with ~"~, then the path is relative to the file which
 contains the include directive.
 #+name: main-3
 #+begin_src C +n
@@ -128,7 +131,7 @@ memory, so no specific value was written there up to now.
 Here we have a conditional clause called ~if~. If the condition in
 the parentheses is true, then the statements following the curly braces
 are executed. 
-Conditionals are described on [[file:../static/books/c-prog-lang.pdf][page 79 in the C Programming Language]].
+Conditionals are described on [[pdf:../static/books/c-prog-lang.pdf::79][page 79 in the C Programming Language]].
 Zephyr follows at least the C99 specification which has added the support
 of boolean values with the type ~bool~ to the language.
 (See [[https://docs.zephyrproject.org/latest/develop/languages/c/index.html][C Language Support]])
@@ -195,10 +198,11 @@ Here is the complete listing of the program:
   <<main-9>>
   <<main-10>>
 #+END_SRC
-* Building the program
+** Building the program
+First we set the build environment variables according to
+[[file:../env/build-environment.en.org::#set-env-vars][Setting Environment Variables]].
 
-
-* Transfer the program 
+** Transfer the program 
 
 #+begin_src svgbob  :cmd svgbob_cli :file ../static/images/blinky.svg :eval no-export 
 	  +------------+   JTAG    +----------------+

@@ -1,7 +1,9 @@
-#+title: Toolbox   
-#+weight: 20
-
-* Emacs - Editor
+* Toolbox   
+:PROPERTIES:
+:EXPORT_FILE_NAME: toolbox.en.md
+:EXPORT_HUGO_WEIGHT: 20
+:END:
+** Emacs - Editor
 As developers of software we will edit text files.
 For this we need a tool called an editor.
 We have chosen the [[https://www.gnu.org/software/emacs/][Emacs]] with good reason. We are going to
@@ -14,7 +16,7 @@ We install the emacs package:
 
 After the installation you can open the editor via the menu ~Development -> Emacs~.
 
-* Git - Version Control System
+** Git - Version Control System
 Open Source Software would not work without a system which allows
 the coordination of the work of many developers working together on a project.
 Even as an individual you can gain many advantages from it:

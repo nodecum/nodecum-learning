@@ -1,4 +1,7 @@
-#+title: Home
+* Preface
+:PROPERTIES:
+:EXPORT_FILE_NAME: _index.en.md
+:END:
 
 It is our goal to develop a self-sufficient communication system
 based on open source software.
